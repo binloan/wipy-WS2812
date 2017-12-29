@@ -32,8 +32,7 @@ Wiring
 ------
 
 WS2812 driver is using SPI bus. Connect your LED's input wire to the SPI bus 0, MOSI is
-  * WiPy: pin GP16
-  * LoPy: pin P22 by default (G9 on extension board)
+  * WiPy/LoPy: pin P11 (G22 on extension board)
 
 Connect LED's power and ground wires to VIN and GND.
 The same applies for LED rings, stripes, etc. (they have always one input wire).
@@ -44,6 +43,10 @@ additional power source.
 More info & Help
 ----------------
 
+Due to a firmware update the library was not working anymore for the LoPy (> 1.9.0b1).
+This new version treats the SPI the same way on the LoPy as on the WiPy which worked fine for me on at least 16LEDs.
+This library might not be compatible with older LoPy firmware versions.
+
 You can check more about the MicroPython project here: http://micropython.org
 
 Discussion about this driver: http://forum.micropython.org/viewtopic.php?f=5&t=394
@@ -51,9 +54,10 @@ Discussion about this driver: http://forum.micropython.org/viewtopic.php?f=5&t=3
 Changelog
 ---------
 
-* 1.1 - Add support for LoPy
+* 1.2 - Added support for LoPy with new firmware versions.
+* 1.1 - Add support for LoPy.
 * 1.0 - First release.
 
 Credit
 ------
-Based on : https://github.com/JanBednarik/micropython-ws2812
+Based on : https://github.com/Gadgetoid/wipy-WS2812

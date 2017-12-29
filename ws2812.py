@@ -33,12 +33,11 @@ class WS2812:
                  b'\xFC\xE0', # 2  0b10
                  b'\xFC\xFC') # 3  0b11
 
-    def __init__(self, ledNumber=1, brightness=100, dataPin='P22'):
+    def __init__(self, ledNumber=1, brightness=100):
         """
         Params:
         * ledNumber = count of LEDs
         * brightness = light brightness (integer : 0 to 100%)
-        * dataPin = pin to connect data channel (LoPy only)
         """
         self.ledNumber = ledNumber
         self.brightness = brightness
@@ -50,14 +49,7 @@ class WS2812:
         # SPI init
         # Bus 0, 8MHz => 125 ns by bit, 8 clock cycle when bit transfert+2 clock cycle between each transfert
         # => 125*10=1.25 us required by WS2812
-        if uname().sysname == 'LoPy':
-            self.spi = SPI(0, SPI.MASTER, baudrate=8000000, polarity=0, phase=1, pins=(None, dataPin, None))
-             # Enable pull down
-            Pin(dataPin, mode=Pin.OUT, pull=Pin.PULL_DOWN)
-        else: #WiPy
-            self.spi = SPI(0, SPI.MASTER, baudrate=8000000, polarity=0, phase=1)
-            # Enable pull down
-            #Pin('P11', mode=Pin.OUT, pull=Pin.PULL_DOWN)
+        self.spi = SPI(0, SPI.MASTER, baudrate=8000000, polarity=0, phase=1)
         
         # Turn LEDs off
         self.show([])
